@@ -24,76 +24,114 @@ Les utilisateurs lambda peuvent soumettre des demandes de réservation pour les 
 Les demandes peuvent être soumises avec un partenaire spécifique ou en attente d'un partenaire.
 Les administrateurs reçoivent des notifications pour approuver la réservation ou signaler que le créneau est déjà pris.
 
+## Routes front:
+
+| Ressource    | Route                   | Méthode | Code de Retour               | Contrôleur           |
+| ------------ | ----------------------- | ------- | ---------------------------- | -------------------- |
+| Affichage    |                         |         |                              |                      |
+|              | `/stands`               | GET     | 200 OK, 404 Not Found        | `FrontendController` |
+|              | `/stands/{id}`          | GET     | 200 OK, 404 Not Found        | `FrontendController` |
+| Planning     |                         |         |                              |                      |
+|              | `/schedule`             | GET     | 200 OK, 404 Not Found        | `FrontendController` |
+|              | `/schedule/{date}`      | GET     | 200 OK, 404 Not Found        | `FrontendController` |
+| Réservations |                         |         |                              |                      |
+|              | `/reservations`         | GET     | 200 OK, 404 Not Found        | `FrontendController` |
+|              | `/reservations/request` | POST    | 201 Created, 400 Bad Request | `FrontendController` |
+
+## Routes Backoffice :
+
+| Ressource         | Route                           | Méthode | Code de Retour                | Contrôleur              |
+| ----------------- | ------------------------------- | ------- | ----------------------------- | ----------------------- |
+| Authentification  |                                 |         |                               |                         |
+|                   | `/backoffice/login`             | POST    | 200 OK, 401 Unauthorized      | `AuthController`        |
+| Stands            |                                 |         |                               |                         |
+|                   | `/backoffice/stands`            | GET     | 200 OK, 404 Not Found         | `StandController`       |
+|                   | `/backoffice/stands`            | POST    | 201 Created, 400 Bad Request  | `StandController`       |
+|                   | `/backoffice/stands/{id}`       | GET     | 200 OK, 404 Not Found         | `StandController`       |
+|                   | `/backoffice/stands/{id}`       | PUT     | 200 OK, 404 Not Found         | `StandController`       |
+|                   | `/backoffice/stands/{id}`       | DELETE  | 204 No Content, 404 Not Found | `StandController`       |
+| Créneaux horaires |                                 |         |                               |                         |
+|                   | `/backoffice/schedule`          | GET     | 200 OK, 404 Not Found         | `ScheduleController`    |
+|                   | `/backoffice/schedule`          | POST    | 201 Created, 400 Bad Request  | `ScheduleController`    |
+|                   | `/backoffice/schedule/{date}`   | GET     | 200 OK, 404 Not Found         | `ScheduleController`    |
+|                   | `/backoffice/schedule/{id}`     | PUT     | 200 OK, 404 Not Found         | `ScheduleController`    |
+|                   | `/backoffice/schedule/{id}`     | DELETE  | 204 No Content, 404 Not Found | `ScheduleController`    |
+| Utilisateurs      |                                 |         |                               |                         |
+|                   | `/backoffice/users`             | GET     | 200 OK, 404 Not Found         | `UserController`        |
+|                   | `/backoffice/users`             | POST    | 201 Created, 400 Bad Request  | `UserController`        |
+|                   | `/backoffice/users/{id}`        | GET     | 200 OK, 404 Not Found         | `UserController`        |
+|                   | `/backoffice/users/{id}`        | PUT     | 200 OK, 404 Not Found         | `UserController`        |
+|                   | `/backoffice/users/{id}`        | DELETE  | 204 No Content, 404 Not Found | `UserController`        |
+| Réservations      |                                 |         |                               |                         |
+|                   | `/backoffice/reservations`      | GET     | 200 OK, 404 Not Found         | `ReservationController` |
+|                   | `/backoffice/reservations`      | POST    | 201 Created, 400 Bad Request  | `ReservationController` |
+|                   | `/backoffice/reservations/{id}` | GET     | 200 OK, 404 Not Found         | `ReservationController` |
+|                   | `/backoffice/reservations/{id}` | PUT     | 200 OK, 404 Not Found         | `ReservationController` |
+|                   | `/backoffice/reservations/{id}` | DELETE  | 204 No Content, 404 Not Found | `ReservationController` |
+| Lieux             |                                 |         |                               |                         |
+|                   | `/backoffice/locations`         | GET     | 200 OK, 404 Not Found         | `LocationController`    |
+|                   | `/backoffice/locations`         | POST    | 201 Created, 400 Bad Request  | `LocationController`    |
+|                   | `/backoffice/locations/{id}`    | GET     | 200 OK, 404 Not Found         | `LocationController`    |
+|                   | `/backoffice/locations/{id}`    | PUT     | 200 OK, 404 Not Found         | `LocationController`    |
+|                   | `/backoffice/locations/{id}`    | DELETE  | 204 No Content, 404 Not Found | `LocationController`    |
+
 ## Routes API (REST) :
 
-- Authentification :
+| Ressource         | Route                             | Méthode | Code de Retour                         | Contrôleur              |
+| ----------------- | --------------------------------- | ------- | -------------------------------------- | ----------------------- |
+| Authentification  |                                   |         |                                        |                         |
+|                   | `/api/login`                      | POST    | 200 OK, 401 Unauthorized               | `AuthController`        |
+| Stands            |                                   |         |                                        |                         |
+|                   | `/api/stands`                     | GET     | 200 OK, 404 Not Found                  | `StandController`       |
+|                   | `/api/stands`                     | POST    | 201 Created, 400 Bad Request           | `StandController`       |
+|                   | `/api/stands/{id}`                | GET     | 200 OK, 404 Not Found                  | `StandController`       |
+|                   | `/api/stands/{id}`                | PUT     | 200 OK, 404 Not Found                  | `StandController`       |
+|                   | `/api/stands/{id}`                | DELETE  | 204 No Content, 404 Not Found          | `StandController`       |
+| Créneaux horaires |                                   |         |                                        |                         |
+|                   | `/api/schedule`                   | GET     | 200 OK, 404 Not Found                  | `ScheduleController`    |
+|                   | `/api/schedule`                   | POST    | 201 Created, 400 Bad Request           | `ScheduleController`    |
+|                   | `/api/schedule/{date}`            | GET     | 200 OK, 404 Not Found                  | `ScheduleController`    |
+|                   | `/api/schedule/{id}`              | PUT     | 200 OK, 404 Not Found                  | `ScheduleController`    |
+|                   | `/api/schedule/{id}`              | DELETE  | 204 No Content, 404 Not Found          | `ScheduleController`    |
+| Utilisateurs      |                                   |         |                                        |                         |
+|                   | `/api/users`                      | GET     | 200 OK, 404 Not Found                  | `UserController`        |
+|                   | `/api/users`                      | POST    | 201 Created, 400 Bad Request           | `UserController`        |
+|                   | `/api/users/{id}`                 | GET     | 200 OK, 404 Not Found                  | `UserController`        |
+|                   | `/api/users/{id}`                 | PUT     | 200 OK, 404 Not Found                  | `UserController`        |
+|                   | `/api/users/{id}`                 | DELETE  | 204 No Content, 404 Not Found          | `UserController`        |
+| Réservations      |                                   |         |                                        |                         |
+|                   | `/api/reservations`               | GET     | 200 OK, 404 Not Found                  | `ReservationController` |
+|                   | `/api/reservations`               | POST    | 201 Created, 400 Bad Request           | `ReservationController` |
+|                   | `/api/reservations/{id}`          | GET     | 200 OK, 404 Not Found                  | `ReservationController` |
+|                   | `/api/reservations/request`       | POST    | 201 Created, 400 Bad Request           | `ReservationController` |
+|                   | `/api/reservations/{id}/approval` | PUT     | 200 OK, 404 Not Found, 400 Bad Request | `ReservationController` |
+| Lieux             |                                   |         |                                        |                         |
+|                   | `/api/locations`                  | GET     | 200 OK, 404 Not Found                  | `LocationController`    |
+|                   | `/api/locations`                  | POST    | 201 Created, 400 Bad Request           | `LocationController`    |
+|                   | `/api/locations/{id}`             | GET     | 200 OK, 404 Not Found                  | `LocationController`    |
+|                   | `/api/locations/{id}`             | PUT     | 200 OK, 404 Not Found                  | `LocationController`    |
+|                   | `/api/locations/{id}`             | DELETE  | 204 No Content, 404 Not Found          | `LocationController`    |
 
-```
-/api/login - Se connecter avec des informations d'identification.
-Méthode : POST
-Code de retour : 200 OK si la connexion réussit, 401 Unauthorized si les informations d'identification sont incorrectes.
-Contrôleur : AuthController
-```
+## UserStories
 
-- Stands et Créneaux horaires :
-
-```
-/api/stands - Obtenir la liste des stands.
-Méthode : GET
-Code de retour : 200 OK avec la liste des stands, 404 Not Found si les stands sont introuvables.
-Contrôleur : StandController
-```
-
-```
-/api/stands/{id} - Obtenir les détails d'un stand spécifique.
-Méthode : GET
-Code de retour : 200 OK avec les détails du stand, 404 Not Found si le stand n'est pas trouvé.
-Contrôleur : StandController
-```
-
-```
-/api/schedule - Obtenir le planning des créneaux horaires.
-Méthode : GET
-Code de retour : 200 OK avec le planning des créneaux horaires, 404 Not Found si les créneaux horaires ne sont pas trouvés.
-Contrôleur : ScheduleController
-```
-
-```
-/api/schedule/{date} - Obtenir les créneaux horaires disponibles pour une date donnée.
-Méthode : GET
-Code de retour : 200 OK avec les créneaux horaires disponibles, 404 Not Found si les créneaux horaires ne sont pas trouvés.
-Contrôleur : ScheduleController
-```
-
-- Gestion des réservations :
-
-```
-GET /api/reservations - Obtenir la liste des réservations.
-Méthode : GET
-Code de retour : 200 OK avec la liste des réservations, 404 Not Found si les réservations ne sont pas trouvées.
-Contrôleur : ReservationController
-```
-
-```
-GET /api/reservations/{id} - Obtenir les détails d'une réservation spécifique.
-Méthode : GET
-Code de retour : 200 OK avec les détails de la réservation, 404 Not Found si la réservation n'est pas trouvée.
-Contrôleur : ReservationController
-```
-
-```
-POST /api/reservations/request - Soumettre une demande de réservation.
-Méthode : POST
-Code de retour : 201 Created si la demande est soumise avec succès, 400 Bad Request si les données sont invalides.
-Contrôleur : ReservationController
-```
-
-```
-PUT /api/reservations/{id}/approval - Accepter ou refuser une réservation spécifique.
-Méthode : PUT
-Code de retour : 200 OK si la mise à jour est réussie, 404 Not Found si la réservation n'est pas trouvée, 400 Bad Request si les données sont invalides.
-Contrôleur : ReservationController
-```
+| ID   | En tant que        | Je veux pouvoir...                                  | Afin de...                                      |
+| ---- | ------------------ | --------------------------------------------------- | ----------------------------------------------- |
+| US1  | Utilisateur lambda | Voir la liste des stands sur un marché              | Savoir quelles personnes tiennent les stands    |
+| US2  | Utilisateur lambda | Voir les détails d'un stand spécifique              | Connaître les personnes, dates et emplacements  |
+| US3  | Utilisateur lambda | Voir le planning des créneaux horaires              | Identifier les créneaux disponibles             |
+| US4  | Utilisateur lambda | Voir les créneaux disponibles pour une date donnée  | Planifier ma participation sur un créneau       |
+| US5  | Utilisateur lambda | Voir la liste des réservations                      | Connaître les réservations en cours             |
+| US6  | Utilisateur lambda | Envoyer une demande de réservation                  | M'inscrire sur un créneau spécifique            |
+| US7  | Administrateur     | Ajouter, modifier ou supprimer des informations     | Gérer les stands, créneaux et réservations      |
+| US8  | Modérateur         | Accepter ou refuser une réservation                 | Gérer les demandes d'inscription                |
+| US9  | Utilisateur lambda | Voir les détails d'une réservation spécifique       | Connaître les détails d'une réservation         |
+| US10 | Utilisateur lambda | Voir la liste des utilisateurs                      | Gérer les profils des utilisateurs              |
+| US11 | Utilisateur lambda | Voir les détails d'un utilisateur spécifique        | Connaître les informations d'un utilisateur     |
+| US12 | Administrateur     | Ajouter, modifier ou supprimer des utilisateurs     | Gérer les utilisateurs                          |
+| US13 | Utilisateur lambda | Voir les détails d'une réservation spécifique       | Connaître les détails d'une réservation         |
+| US14 | Administrateur     | Voir la liste des lieux                             | Gérer les emplacements des stands               |
+| US15 | Administrateur     | Ajouter, modifier ou supprimer des lieux            | Gérer les emplacements des stands               |
+| US16 | Utilisateur lambda | Se connecter avec des informations d'identification | Accéder aux fonctionnalités de l'administration |
 
 ## Entités :
 
@@ -130,5 +168,4 @@ ID (unique identifier)
 Status (pending, accepted, refused)
 User_ID (foreign key linked to User entity)
 TimeSlot_ID (foreign key linked to Time Slot entity)
-
 ```
