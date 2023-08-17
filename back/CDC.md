@@ -11,8 +11,8 @@ L'admin reçoit une notification, et accepte ou non l'inscription et renvoie la 
 
 - ### Authentification et autorisation :
 
-Les utilisateurs lambda peuventoivent se connecter pour voir l'affichage.
-L'administrateur et les modérateurs ont des privilèges pour ajouter, modifier et supprimer des informations.
+Les utilisateurs lambda doivent se connecter pour voir l'affichage, réserver un ou plusieurs créneau(x) ou s'y désister.
+L'administrateur et les modérateurs ont les privilèges pour ajouter, modifier et supprimer des informations.
 
 - ### Affichage des stands :
 
