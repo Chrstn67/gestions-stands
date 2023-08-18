@@ -9,22 +9,10 @@
   <body>
     <header>
       <h1>Gestion des stands</h1>
-      <button type="submit">Se connecter</button>
+      <button id="login-button" type="button">Se connecter</button>
     </header>
     <main>
-      <input type="date" name="calendar" id="calendar" />
-      <table id="standDetails" class="hidden">
-        <thead>
-          <tr>
-            <th>Lieu</th>
-            <th>Crénaux horaires</th>
-            <th>Personnes au stand</th>
-          </tr>
-        </thead>
-        <tbody>
-          <!-- Les données du stand seront ajoutées ici via API (pour le moment JS) -->
-        </tbody>
-      </table>
+      <section id="calendarThis"></section>
     </main>
     <script src="script.js"></script>
   </body>
