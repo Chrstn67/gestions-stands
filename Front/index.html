@@ -12,7 +12,99 @@
       <button id="login-button" type="button">Se connecter</button>
     </header>
     <main>
+      <section id="login-modal" class="modal">
+        <div class="modal-content">
+          <span class="close" id="close-login">&times;</span>
+          <h2>Connexion</h2>
+          <form>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              placeholder="Entrez votre prénom suivi de votre NOM"
+              required
+            />
+
+            <input
+              type="email"
+              id="mail"
+              name="mail"
+              placeholder="Entrez votre adresse e-mail"
+              required
+            />
+
+            <input
+              type="password"
+              id="password"
+              name="password"
+              placeholder="Entrez votre mot de passe"
+              required
+            />
+
+            <fieldset class="checkbox-group">
+              <legend>Rôle</legend>
+              <label>
+                <input type="radio" name="role" value="admin" />
+                Administrateur
+              </label>
+              <label>
+                <input type="radio" name="role" value="moderateur" />
+                Modérateur
+              </label>
+              <label>
+                <input type="radio" name="role" value="lambda" checked />
+                Sans rôle
+              </label>
+            </fieldset>
+
+            <button type="submit">Se connecter</button>
+          </form>
+        </div>
+      </section>
       <section id="calendarThis"></section>
+      <section id="info-place">
+        <table>
+          <tr>
+            <th>Lieu</th>
+            <th>Créneaux</th>
+            <th>Participants</th>
+          </tr>
+          <tr>
+            <td rowspan="4">Lieu A</td>
+            <td>8.00 - 9.00</td>
+            <td>Daisy & Donald</td>
+          </tr>
+          <tr>
+            <td>9.00 - 10.00</td>
+            <td>Bonnie & Clyde</td>
+          </tr>
+          <tr>
+            <td>10.00 - 11.00</td>
+            <td>Fish & Chips</td>
+          </tr>
+          <tr>
+            <td>11.00 - 12.00</td>
+            <td>Marine & Wendy</td>
+          </tr>
+          <tr>
+            <td rowspan="4">Lieu B</td>
+            <td>8.00 - 9.00</td>
+            <td>Boulard & Nitchinsky</td>
+          </tr>
+          <tr>
+            <td>9.00 - 10.00</td>
+            <td>Starsky & Hutch</td>
+          </tr>
+          <tr>
+            <td>10.00 - 11.00</td>
+            <td>Richy & Povery</td>
+          </tr>
+          <tr>
+            <td>11.00 - 12.00</td>
+            <td>Riri & Fifi</td>
+          </tr>
+        </table>
+      </section>
     </main>
     <script src="script.js"></script>
   </body>

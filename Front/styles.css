@@ -120,3 +120,73 @@ h1 {
     width: 22.375rem; /* Equivalent to 358px */
   }
 }
+
+#info-place table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 2vh;
+  background-color: white;
+}
+
+#info-place th,
+#info-place td {
+  border: 1px solid #ddd;
+  padding: 1rem;
+  text-align: center;
+}
+
+/* Portrait and Landscape */
+@media (max-width: 47.9375rem) {
+  /* Equivalent to 767px */
+  #calendarThis {
+    width: 22.375rem; /* Equivalent to 358px */
+  }
+
+  #info-place table {
+    font-size: 0.9rem;
+  }
+
+  #info-place th,
+  #info-place td {
+    padding: 0.6rem;
+  }
+}
+
+input {
+  width: 100%;
+}
+
+/* Styles de base */
+.checkbox-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
+
+label {
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+input[type="radio"] {
+  margin-right: 0.5rem;
+}
+
+/* Styles responsifs */
+@media (max-width: 768px) {
+  /* Par exemple, les styles pour les écrans jusqu'à 768px de largeur */
+  .checkbox-group {
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  label {
+    font-size: 0.9rem;
+    margin-right: 1rem;
+  }
+
+  input[type="radio"] {
+    margin-right: 0.3rem;
+  }
+}

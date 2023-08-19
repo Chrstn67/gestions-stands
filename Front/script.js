@@ -181,3 +181,19 @@
     }
   });
 })();
+
+document.addEventListener("DOMContentLoaded", function () {
+  // Récupération des éléments nécessaires
+  const loginButton = document.getElementById("login-button");
+  const loginModal = document.getElementById("login-modal");
+  const closeLogin = document.getElementById("close-login");
+
+  // Afficher la modale lorsque le bouton est cliqué
+  loginButton.addEventListener("click", function () {
+    loginModal.style.display = "block";
+  });
+
+  closeLogin.addEventListener("click", function () {
+    loginModal.style.display = "none";
+  });
+});
