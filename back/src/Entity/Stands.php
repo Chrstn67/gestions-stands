@@ -19,6 +19,12 @@ class Stands
     #[ORM\Column(length: 50)]
     private ?string $location = null;
 
+    #[ORM\ManyToOne(inversedBy: 'run')]
+    private ?Reservations $reservations = null;
+
+    #[ORM\OneToOne(inversedBy: 'stands', cascade: ['persist', 'remove'])]
+    private ?Reservations $run = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -44,6 +50,30 @@ class Stands
     public function setLocation(string $location): static
     {
         $this->location = $location;
+
+        return $this;
+    }
+
+    public function getReservations(): ?Reservations
+    {
+        return $this->reservations;
+    }
+
+    public function setReservations(?Reservations $reservations): static
+    {
+        $this->reservations = $reservations;
+
+        return $this;
+    }
+
+    public function getRun(): ?Reservations
+    {
+        return $this->run;
+    }
+
+    public function setRun(?Reservations $run): static
+    {
+        $this->run = $run;
 
         return $this;
     }
