@@ -27,13 +27,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?string $password = null;
 
-    #[ORM\ManyToOne(inversedBy: 'choose')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?Reservation $reservation = null;
-
-    #[ORM\OneToOne(mappedBy: 'chosse', cascade: ['persist', 'remove'])]
-    private ?Reservations $reservations = null;
-
     public function getId(): ?int
     {
         return $this->id;
@@ -102,39 +95,5 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
-    }
-
-    public function getReservation(): ?Reservation
-    {
-        return $this->reservation;
-    }
-
-    public function setReservation(?Reservation $reservation): static
-    {
-        $this->reservation = $reservation;
-
-        return $this;
-    }
-
-    public function getReservations(): ?Reservations
-    {
-        return $this->reservations;
-    }
-
-    public function setReservations(?Reservations $reservations): static
-    {
-        // unset the owning side of the relation if necessary
-        if ($reservations === null && $this->reservations !== null) {
-            $this->reservations->setChosse(null);
-        }
-
-        // set the owning side of the relation if necessary
-        if ($reservations !== null && $reservations->getChosse() !== $this) {
-            $reservations->setChosse($this);
-        }
-
-        $this->reservations = $reservations;
-
-        return $this;
     }
 }
