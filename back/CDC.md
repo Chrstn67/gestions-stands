@@ -133,39 +133,6 @@ Les administrateurs reçoivent des notifications pour approuver la réservation 
 | US15 | Administrateur     | Ajouter, modifier ou supprimer des lieux            | Gérer les emplacements des stands               |
 | US16 | Utilisateur lambda | Se connecter avec des informations d'identification | Accéder aux fonctionnalités de l'administration |
 
-## Entités :
+## MCD :
 
-- ##### Utilisateur
-
-```
-  ID (unique identifier)
-Name
-Email
-Password (encrypted)
-Role (lambda, administrator, moderator)
-```
-
-- ##### Stand
-
-```
-ID (unique identifier)
-Name
-Location
-```
-
-- ##### Créneau Horaire
-
-```
-ID (unique identifier)
-Datetime
-Stand_ID (foreign key linked to Stand entity)
-```
-
-- ##### Réservation
-
-```
-ID (unique identifier)
-Status (pending, accepted, refused)
-User_ID (foreign key linked to User entity)
-TimeSlot_ID (foreign key linked to Time Slot entity)
-```
+![Alt text](image.png)
