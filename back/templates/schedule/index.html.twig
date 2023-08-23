@@ -1,20 +1,41 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ScheduleController!{% endblock %}
+{% block title %}Schedule index{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    <h1>Schedule index</h1>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Calendar_date</th>
+                <th>Start_time</th>
+                <th>End_time</th>
+                <th>Statut_schedule</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for schedule in schedules %}
+            <tr>
+                <td>{{ schedule.id }}</td>
+                <td>{{ schedule.calendarDate ? schedule.calendarDate|date('Y-m-d') : '' }}</td>
+                <td>{{ schedule.startTime ? schedule.startTime|date('H:i:s') : '' }}</td>
+                <td>{{ schedule.endTime ? schedule.endTime|date('H:i:s') : '' }}</td>
+                <td>{{ schedule.statutSchedule }}</td>
+                <td>
+                    <a href="{{ path('app_schedule_show', {'id': schedule.id}) }}">show</a>
+                    <a href="{{ path('app_schedule_edit', {'id': schedule.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'D:/MesSites/gestion-stand/back/src/Controller/ScheduleController.php'|file_link(0) }}">src/Controller/ScheduleController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'D:/MesSites/gestion-stand/back/templates/schedule/index.html.twig'|file_link(0) }}">templates/schedule/index.html.twig</a></code></li>
-    </ul>
-</div>
+    <a href="{{ path('app_schedule_new') }}">Create new</a>
 {% endblock %}
