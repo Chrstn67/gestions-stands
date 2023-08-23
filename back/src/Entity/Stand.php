@@ -18,11 +18,11 @@ class Stand
     #[ORM\Column(length: 50)]
     private ?string $location = null;
 
-    #[ORM\ManyToMany(targetEntity: Utilisateur::class, inversedBy: 'stands')]
+    #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'stands')]
     private Collection $run;
 
-    #[ORM\ManyToMany(targetEntity: Utilisateur::class, mappedBy: 'run')]
-    private Collection $utilisateurs;
+    #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'run')]
+    private Collection $users;
 
     #[ORM\OneToOne(mappedBy: 'has', cascade: ['persist', 'remove'])]
     private ?Schedule $schedule = null;
@@ -33,7 +33,7 @@ class Stand
     public function __construct()
     {
         $this->run = new ArrayCollection();
-        $this->utilisateurs = new ArrayCollection();
+        $this->users = new ArrayCollection();
         $this->has = new ArrayCollection();
     }
 
@@ -55,14 +55,14 @@ class Stand
     }
 
     /**
-     * @return Collection<int, Utilisateur>
+     * @return Collection<int, User>
      */
     public function getRun(): Collection
     {
         return $this->run;
     }
 
-    public function addRun(Utilisateur $run): static
+    public function addRun(User $run): static
     {
         if (!$this->run->contains($run)) {
             $this->run->add($run);
@@ -71,7 +71,7 @@ class Stand
         return $this;
     }
 
-    public function removeRun(Utilisateur $run): static
+    public function removeRun(User $run): static
     {
         $this->run->removeElement($run);
 
@@ -79,27 +79,27 @@ class Stand
     }
 
     /**
-     * @return Collection<int, Utilisateur>
+     * @return Collection<int, User>
      */
-    public function getUtilisateurs(): Collection
+    public function getUsers(): Collection
     {
-        return $this->utilisateurs;
+        return $this->users;
     }
 
-    public function addUtilisateur(Utilisateur $utilisateur): static
+    public function addUser(User $user): static
     {
-        if (!$this->utilisateurs->contains($utilisateur)) {
-            $this->utilisateurs->add($utilisateur);
-            $utilisateur->addRun($this);
+        if (!$this->users->contains($user)) {
+            $this->users->add($user);
+            $user->addRun($this);
         }
 
         return $this;
     }
 
-    public function removeUtilisateur(Utilisateur $utilisateur): static
+    public function removeUser(User $user): static
     {
-        if ($this->utilisateurs->removeElement($utilisateur)) {
-            $utilisateur->removeRun($this);
+        if ($this->users->removeElement($user)) {
+            $user->removeRun($this);
         }
 
         return $this;

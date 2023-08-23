@@ -17,7 +17,7 @@ class Schedule
     private ?int $id = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
-    private ?\DateTimeInterface $calentar_date = null;
+    private ?\DateTimeInterface $calendar_date = null;
 
     #[ORM\Column(type: Types::TIME_MUTABLE)]
     private ?\DateTimeInterface $start_time = null;
@@ -51,14 +51,14 @@ class Schedule
         return $this->id;
     }
 
-    public function getCalentarDate(): ?\DateTimeInterface
+    public function getCalendarDate(): ?\DateTimeInterface
     {
-        return $this->calentar_date;
+        return $this->calendar_date;
     }
 
-    public function setCalentarDate(\DateTimeInterface $calentar_date): static
+    public function setCalendarDate(\DateTimeInterface $calendar_date): static
     {
-        $this->calentar_date = $calentar_date;
+        $this->calendar_date = $calendar_date;
 
         return $this;
     }

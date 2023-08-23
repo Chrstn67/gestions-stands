@@ -18,7 +18,7 @@ class Reservation
     #[ORM\Column]
     private ?int $statut_resa = null;
 
-    #[ORM\Column(length: 50)]
+    #[ORM\Column(length: 50, nullable: true)]
     private ?string $partner = null;
 
     #[ORM\ManyToMany(targetEntity: Schedule::class, inversedBy: 'reservations')]
@@ -28,16 +28,16 @@ class Reservation
     private Collection $schedules;
 
     #[ORM\OneToOne(inversedBy: 'reservation', cascade: ['persist', 'remove'])]
-    private ?Utilisateur $reserve = null;
+    private ?User $reserve = null;
 
-    #[ORM\ManyToMany(targetEntity: Utilisateur::class, mappedBy: 'reserve')]
-    private Collection $utilisateurs;
+    #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'reserve')]
+    private Collection $users;
 
     public function __construct()
     {
         $this->planned = new ArrayCollection();
         $this->schedules = new ArrayCollection();
-        $this->utilisateurs = new ArrayCollection();
+        $this->users = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -62,7 +62,7 @@ class Reservation
         return $this->partner;
     }
 
-    public function setPartner(string $partner): static
+    public function setPartner(?string $partner): static
     {
         $this->partner = $partner;
 
@@ -120,12 +120,12 @@ class Reservation
         return $this;
     }
 
-    public function getReserve(): ?Utilisateur
+    public function getReserve(): ?User
     {
         return $this->reserve;
     }
 
-    public function setReserve(?Utilisateur $reserve): static
+    public function setReserve(?User $reserve): static
     {
         $this->reserve = $reserve;
 
@@ -133,27 +133,27 @@ class Reservation
     }
 
     /**
-     * @return Collection<int, Utilisateur>
+     * @return Collection<int, User>
      */
-    public function getUtilisateurs(): Collection
+    public function getUsers(): Collection
     {
-        return $this->utilisateurs;
+        return $this->users;
     }
 
-    public function addUtilisateur(Utilisateur $utilisateur): static
+    public function addUser(User $user): static
     {
-        if (!$this->utilisateurs->contains($utilisateur)) {
-            $this->utilisateurs->add($utilisateur);
-            $utilisateur->addReserve($this);
+        if (!$this->users->contains($user)) {
+            $this->users->add($user);
+            $user->addReserve($this);
         }
 
         return $this;
     }
 
-    public function removeUtilisateur(Utilisateur $utilisateur): static
+    public function removeUser(User $user): static
     {
-        if ($this->utilisateurs->removeElement($utilisateur)) {
-            $utilisateur->removeReserve($this);
+        if ($this->users->removeElement($user)) {
+            $user->removeReserve($this);
         }
 
         return $this;
