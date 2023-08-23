@@ -135,8 +135,8 @@ Les administrateurs reçoivent des notifications pour approuver la réservation 
 
 ## MCD :
 
-![Alt text](image-2.png)
+![Alt text](image-4.png)
 
 ## MPD :
 
-![Alt text](image-3.png)
+![Alt text](image-5.png)
