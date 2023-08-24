@@ -19,6 +19,9 @@ class Stand
     #[ORM\Column(length: 50)]
     private ?string $location = null;
 
+    #[ORM\OneToOne(mappedBy: 'Stand', cascade: ['persist', 'remove'])]
+    private ?Reservation $reservation = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -44,6 +47,23 @@ class Stand
     public function setLocation(string $location): static
     {
         $this->location = $location;
+
+        return $this;
+    }
+
+    public function getReservation(): ?Reservation
+    {
+        return $this->reservation;
+    }
+
+    public function setReservation(Reservation $reservation): static
+    {
+        // set the owning side of the relation if necessary
+        if ($reservation->getStand() !== $this) {
+            $reservation->setStand($this);
+        }
+
+        $this->reservation = $reservation;
 
         return $this;
     }

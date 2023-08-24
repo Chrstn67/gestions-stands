@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Stand{% endblock %}
+
+{% block body %}
+    <h1>Stand</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ stand.id }}</td>
+            </tr>
+            <tr>
+                <th>Stand_name</th>
+                <td>{{ stand.standName }}</td>
+            </tr>
+            <tr>
+                <th>Location</th>
+                <td>{{ stand.location }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_stand_index') }}">back to list</a>
+
+    <a href="{{ path('app_stand_edit', {'id': stand.id}) }}">edit</a>
+
+    {{ include('stand/_delete_form.html.twig') }}
+{% endblock %}

@@ -26,6 +26,14 @@ class Reservation
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $created_at = null;
 
+    #[ORM\OneToOne(inversedBy: 'reservation', cascade: ['persist', 'remove'])]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $User = null;
+
+    #[ORM\OneToOne(inversedBy: 'reservation', cascade: ['persist', 'remove'])]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Stand $Stand = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -77,5 +85,40 @@ class Reservation
         $this->created_at = $created_at;
 
         return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->User;
+    }
+
+    public function setUser(User $User): static
+    {
+        $this->User = $User;
+
+        return $this;
+    }
+
+    public function getStand(): ?Stand
+    {
+        return $this->Stand;
+    }
+
+    public function setStand(Stand $Stand): static
+    {
+        $this->Stand = $Stand;
+
+        return $this;
+    }
+
+    public function getFormattedStatut(): string
+    {
+        $statutLabels = [
+            0 => 'En attente',
+            1 => 'Acceptée',
+            2 => 'Refusée',
+        ];
+
+        return $statutLabels[$this->statut_resa];
     }
 }
