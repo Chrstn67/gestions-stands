@@ -3,8 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\ReservationRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ReservationRepository::class)]
@@ -15,34 +14,45 @@ class Reservation
     #[ORM\Column]
     private ?int $id = null;
 
+    #[ORM\Column(type: Types::DATE_MUTABLE)]
+    private ?\DateTimeInterface $calendar_date = null;
+
+    #[ORM\Column(type: Types::TIME_MUTABLE)]
+    private ?\DateTimeInterface $hour_time = null;
+
     #[ORM\Column]
     private ?int $statut_resa = null;
 
-    #[ORM\Column(length: 50, nullable: true)]
-    private ?string $partner = null;
-
-    #[ORM\ManyToMany(targetEntity: Schedule::class, inversedBy: 'reservations')]
-    private Collection $planned;
-
-    #[ORM\ManyToMany(targetEntity: Schedule::class, mappedBy: 'planned')]
-    private Collection $schedules;
-
-    #[ORM\OneToOne(inversedBy: 'reservation', cascade: ['persist', 'remove'])]
-    private ?User $reserve = null;
-
-    #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'reserve')]
-    private Collection $users;
-
-    public function __construct()
-    {
-        $this->planned = new ArrayCollection();
-        $this->schedules = new ArrayCollection();
-        $this->users = new ArrayCollection();
-    }
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    private ?\DateTimeInterface $created_at = null;
 
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getCalendarDate(): ?\DateTimeInterface
+    {
+        return $this->calendar_date;
+    }
+
+    public function setCalendarDate(\DateTimeInterface $calendar_date): static
+    {
+        $this->calendar_date = $calendar_date;
+
+        return $this;
+    }
+
+    public function getHourTime(): ?\DateTimeInterface
+    {
+        return $this->hour_time;
+    }
+
+    public function setHourTime(\DateTimeInterface $hour_time): static
+    {
+        $this->hour_time = $hour_time;
+
+        return $this;
     }
 
     public function getStatutResa(): ?int
@@ -57,104 +67,14 @@ class Reservation
         return $this;
     }
 
-    public function getPartner(): ?string
+    public function getCreatedAt(): ?\DateTimeInterface
     {
-        return $this->partner;
+        return $this->created_at;
     }
 
-    public function setPartner(?string $partner): static
+    public function setCreatedAt(\DateTimeInterface $created_at): static
     {
-        $this->partner = $partner;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Schedule>
-     */
-    public function getPlanned(): Collection
-    {
-        return $this->planned;
-    }
-
-    public function addPlanned(Schedule $planned): static
-    {
-        if (!$this->planned->contains($planned)) {
-            $this->planned->add($planned);
-        }
-
-        return $this;
-    }
-
-    public function removePlanned(Schedule $planned): static
-    {
-        $this->planned->removeElement($planned);
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Schedule>
-     */
-    public function getSchedules(): Collection
-    {
-        return $this->schedules;
-    }
-
-    public function addSchedule(Schedule $schedule): static
-    {
-        if (!$this->schedules->contains($schedule)) {
-            $this->schedules->add($schedule);
-            $schedule->addPlanned($this);
-        }
-
-        return $this;
-    }
-
-    public function removeSchedule(Schedule $schedule): static
-    {
-        if ($this->schedules->removeElement($schedule)) {
-            $schedule->removePlanned($this);
-        }
-
-        return $this;
-    }
-
-    public function getReserve(): ?User
-    {
-        return $this->reserve;
-    }
-
-    public function setReserve(?User $reserve): static
-    {
-        $this->reserve = $reserve;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, User>
-     */
-    public function getUsers(): Collection
-    {
-        return $this->users;
-    }
-
-    public function addUser(User $user): static
-    {
-        if (!$this->users->contains($user)) {
-            $this->users->add($user);
-            $user->addReserve($this);
-        }
-
-        return $this;
-    }
-
-    public function removeUser(User $user): static
-    {
-        if ($this->users->removeElement($user)) {
-            $user->removeReserve($this);
-        }
+        $this->created_at = $created_at;
 
         return $this;
     }
