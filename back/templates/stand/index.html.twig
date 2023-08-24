@@ -9,9 +9,9 @@
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Stand_name</th>
-                <th>Location</th>
-                <th>actions</th>
+                <th>Nom du Stand</th>
+                <th>Lieu</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -21,17 +21,17 @@
                 <td>{{ stand.standName }}</td>
                 <td>{{ stand.location }}</td>
                 <td>
-                    <a href="{{ path('app_stand_show', {'id': stand.id}) }}">show</a>
-                    <a href="{{ path('app_stand_edit', {'id': stand.id}) }}">edit</a>
+                    <a href="{{ path('app_stand_show', {'id': stand.id}) }}">Montrer</a>
+                    <a href="{{ path('app_stand_edit', {'id': stand.id}) }}">Éditer</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="4">no records found</td>
+                <td colspan="4">Pas de stand</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('app_stand_new') }}">Create new</a>
+    <a href="{{ path('app_stand_new') }}">Créer un stand</a>
 {% endblock %}
