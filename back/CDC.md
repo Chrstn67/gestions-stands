@@ -40,77 +40,42 @@ Les administrateurs reçoivent des notifications pour approuver la réservation 
 
 ## Routes Backoffice :
 
-| Ressource         | Route                           | Méthode | Code de Retour                | Contrôleur              |
-| ----------------- | ------------------------------- | ------- | ----------------------------- | ----------------------- |
-| Authentification  |                                 |         |                               |                         |
-|                   | `/backoffice/login`             | POST    | 200 OK, 401 Unauthorized      | `AuthController`        |
-| Stands            |                                 |         |                               |                         |
-|                   | `/backoffice/stands`            | GET     | 200 OK, 404 Not Found         | `StandController`       |
-|                   | `/backoffice/stands`            | POST    | 201 Created, 400 Bad Request  | `StandController`       |
-|                   | `/backoffice/stands/{id}`       | GET     | 200 OK, 404 Not Found         | `StandController`       |
-|                   | `/backoffice/stands/{id}`       | PUT     | 200 OK, 404 Not Found         | `StandController`       |
-|                   | `/backoffice/stands/{id}`       | DELETE  | 204 No Content, 404 Not Found | `StandController`       |
-| Créneaux horaires |                                 |         |                               |                         |
-|                   | `/backoffice/schedule`          | GET     | 200 OK, 404 Not Found         | `ScheduleController`    |
-|                   | `/backoffice/schedule`          | POST    | 201 Created, 400 Bad Request  | `ScheduleController`    |
-|                   | `/backoffice/schedule/{date}`   | GET     | 200 OK, 404 Not Found         | `ScheduleController`    |
-|                   | `/backoffice/schedule/{id}`     | PUT     | 200 OK, 404 Not Found         | `ScheduleController`    |
-|                   | `/backoffice/schedule/{id}`     | DELETE  | 204 No Content, 404 Not Found | `ScheduleController`    |
-| Utilisateurs      |                                 |         |                               |                         |
-|                   | `/backoffice/users`             | GET     | 200 OK, 404 Not Found         | `UserController`        |
-|                   | `/backoffice/users`             | POST    | 201 Created, 400 Bad Request  | `UserController`        |
-|                   | `/backoffice/users/{id}`        | GET     | 200 OK, 404 Not Found         | `UserController`        |
-|                   | `/backoffice/users/{id}`        | PUT     | 200 OK, 404 Not Found         | `UserController`        |
-|                   | `/backoffice/users/{id}`        | DELETE  | 204 No Content, 404 Not Found | `UserController`        |
-| Réservations      |                                 |         |                               |                         |
-|                   | `/backoffice/reservations`      | GET     | 200 OK, 404 Not Found         | `ReservationController` |
-|                   | `/backoffice/reservations`      | POST    | 201 Created, 400 Bad Request  | `ReservationController` |
-|                   | `/backoffice/reservations/{id}` | GET     | 200 OK, 404 Not Found         | `ReservationController` |
-|                   | `/backoffice/reservations/{id}` | PUT     | 200 OK, 404 Not Found         | `ReservationController` |
-|                   | `/backoffice/reservations/{id}` | DELETE  | 204 No Content, 404 Not Found | `ReservationController` |
-| Lieux             |                                 |         |                               |                         |
-|                   | `/backoffice/locations`         | GET     | 200 OK, 404 Not Found         | `LocationController`    |
-|                   | `/backoffice/locations`         | POST    | 201 Created, 400 Bad Request  | `LocationController`    |
-|                   | `/backoffice/locations/{id}`    | GET     | 200 OK, 404 Not Found         | `LocationController`    |
-|                   | `/backoffice/locations/{id}`    | PUT     | 200 OK, 404 Not Found         | `LocationController`    |
-|                   | `/backoffice/locations/{id}`    | DELETE  | 204 No Content, 404 Not Found | `LocationController`    |
+| Ressource        | Route                           | Méthode | Code de Retour                | Contrôleur              |
+| ---------------- | ------------------------------- | ------- | ----------------------------- | ----------------------- |
+| Authentification |                                 |         |                               |                         |
+|                  | `/backoffice/login`             | POST    | 200 OK, 401 Unauthorized      | `AuthController`        |
+| Stands           |                                 |         |                               |                         |
+|                  | `/backoffice/stands`            | GET     | 200 OK, 404 Not Found         | `StandController`       |
+|                  | `/backoffice/stands`            | POST    | 201 Created, 400 Bad Request  | `StandController`       |
+|                  | `/backoffice/stands/{id}`       | GET     | 200 OK, 404 Not Found         | `StandController`       |
+|                  | `/backoffice/stands/{id}`       | PUT     | 200 OK, 404 Not Found         | `StandController`       |
+|                  | `/backoffice/stands/{id}`       | DELETE  | 204 No Content, 404 Not Found | `StandController`       |
+| Utilisateurs     |                                 |         |                               |                         |
+|                  | `/backoffice/users`             | GET     | 200 OK, 404 Not Found         | `UserController`        |
+|                  | `/backoffice/users`             | POST    | 201 Created, 400 Bad Request  | `UserController`        |
+|                  | `/backoffice/users/{id}`        | GET     | 200 OK, 404 Not Found         | `UserController`        |
+|                  | `/backoffice/users/{id}`        | PUT     | 200 OK, 404 Not Found         | `UserController`        |
+|                  | `/backoffice/users/{id}`        | DELETE  | 204 No Content, 404 Not Found | `UserController`        |
+| Réservations     |                                 |         |                               |                         |
+|                  | `/backoffice/reservations`      | GET     | 200 OK, 404 Not Found         | `ReservationController` |
+|                  | `/backoffice/reservations`      | POST    | 201 Created, 400 Bad Request  | `ReservationController` |
+|                  | `/backoffice/reservations/{id}` | GET     | 200 OK, 404 Not Found         | `ReservationController` |
+|                  | `/backoffice/reservations/{id}` | PUT     | 200 OK, 404 Not Found         | `ReservationController` |
+|                  | `/backoffice/reservations/{id}` | DELETE  | 204 No Content, 404 Not Found | `ReservationController` |
 
 ## Routes API (REST) :
 
-| Ressource         | Route                             | Méthode | Code de Retour                         | Contrôleur              |
-| ----------------- | --------------------------------- | ------- | -------------------------------------- | ----------------------- |
-| Authentification  |                                   |         |                                        |                         |
-|                   | `/api/login`                      | POST    | 200 OK, 401 Unauthorized               | `AuthController`        |
-| Stands            |                                   |         |                                        |                         |
-|                   | `/api/stands`                     | GET     | 200 OK, 404 Not Found                  | `StandController`       |
-|                   | `/api/stands`                     | POST    | 201 Created, 400 Bad Request           | `StandController`       |
-|                   | `/api/stands/{id}`                | GET     | 200 OK, 404 Not Found                  | `StandController`       |
-|                   | `/api/stands/{id}`                | PUT     | 200 OK, 404 Not Found                  | `StandController`       |
-|                   | `/api/stands/{id}`                | DELETE  | 204 No Content, 404 Not Found          | `StandController`       |
-| Créneaux horaires |                                   |         |                                        |                         |
-|                   | `/api/schedule`                   | GET     | 200 OK, 404 Not Found                  | `ScheduleController`    |
-|                   | `/api/schedule`                   | POST    | 201 Created, 400 Bad Request           | `ScheduleController`    |
-|                   | `/api/schedule/{date}`            | GET     | 200 OK, 404 Not Found                  | `ScheduleController`    |
-|                   | `/api/schedule/{id}`              | PUT     | 200 OK, 404 Not Found                  | `ScheduleController`    |
-|                   | `/api/schedule/{id}`              | DELETE  | 204 No Content, 404 Not Found          | `ScheduleController`    |
-| Utilisateurs      |                                   |         |                                        |                         |
-|                   | `/api/users`                      | GET     | 200 OK, 404 Not Found                  | `UserController`        |
-|                   | `/api/users`                      | POST    | 201 Created, 400 Bad Request           | `UserController`        |
-|                   | `/api/users/{id}`                 | GET     | 200 OK, 404 Not Found                  | `UserController`        |
-|                   | `/api/users/{id}`                 | PUT     | 200 OK, 404 Not Found                  | `UserController`        |
-|                   | `/api/users/{id}`                 | DELETE  | 204 No Content, 404 Not Found          | `UserController`        |
-| Réservations      |                                   |         |                                        |                         |
-|                   | `/api/reservations`               | GET     | 200 OK, 404 Not Found                  | `ReservationController` |
-|                   | `/api/reservations`               | POST    | 201 Created, 400 Bad Request           | `ReservationController` |
-|                   | `/api/reservations/{id}`          | GET     | 200 OK, 404 Not Found                  | `ReservationController` |
-|                   | `/api/reservations/request`       | POST    | 201 Created, 400 Bad Request           | `ReservationController` |
-|                   | `/api/reservations/{id}/approval` | PUT     | 200 OK, 404 Not Found, 400 Bad Request | `ReservationController` |
-| Lieux             |                                   |         |                                        |                         |
-|                   | `/api/locations`                  | GET     | 200 OK, 404 Not Found                  | `LocationController`    |
-|                   | `/api/locations`                  | POST    | 201 Created, 400 Bad Request           | `LocationController`    |
-|                   | `/api/locations/{id}`             | GET     | 200 OK, 404 Not Found                  | `LocationController`    |
-|                   | `/api/locations/{id}`             | PUT     | 200 OK, 404 Not Found                  | `LocationController`    |
-|                   | `/api/locations/{id}`             | DELETE  | 204 No Content, 404 Not Found          | `LocationController`    |
+| Ressource    | Route                                | Méthode | Code de Retour                         | Contrôleur                 |
+| ------------ | ------------------------------------ | ------- | -------------------------------------- | -------------------------- |
+| Login        |                                      |         |                                        |                            |
+|              | `/api/login`                         | POST    | 200 OK, 403 Unauthorized               | `ApiUserController`        |
+| Stands       |                                      |         |                                        |                            |
+|              | `/api/stands`                        | GET     | 200 OK, 404 Not Found                  | `ApiStandController`       |
+| Réservations |                                      |         |                                        |                            |
+|              | `/api/reservations/{standId}/{date}` | GET     | 200 OK, 404 Not Found                  | `ApiReservationController` |
+|              | `/api/reservations`                  | POST    | 201 Created, 400 Bad Request           | `ApiReservationController` |
+|              | `/api/reservations/{reservationId}`  | PUT     | 200 OK, 404 Not Found, 400 Bad Request | `ApiReservationController` |
+|              | `/api/reservations/{reservationId}`  | DELETE  | 204 No Content, 404 Not Found          | `ApiReservationController` |
 
 ## UserStories
 
@@ -135,8 +100,8 @@ Les administrateurs reçoivent des notifications pour approuver la réservation 
 
 ## MCD :
 
-![Alt text](image-4.png)
+![Alt text](image.png)
 
 ## MPD :
 
-![Alt text](image-5.png)
+![Alt text](image-1.png)
