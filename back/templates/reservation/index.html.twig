@@ -11,6 +11,7 @@
                 <th>Id</th>
                 <th>Date</th>
                 <th>À partir de</th>
+                <th>Par</th>
                 <th>Statut</th>
                 <th>Demande effectuée le</th>
                 <th>Actions</th>
@@ -22,6 +23,7 @@
                 <td>{{ reservation.id }}</td>
                 <td>{{ reservation.calendarDate ? reservation.calendarDate|date('Y-m-d') : '' }}</td>
                 <td>{{ reservation.hourTime ? reservation.hourTime|date('H:i:s') : '' }}</td>
+                <td>{{ reservation.user.name}}</td>
                 <td>{{ reservation.getFormattedStatut() }}</td>
                 <td>{{ reservation.createdAt ? reservation.createdAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>
