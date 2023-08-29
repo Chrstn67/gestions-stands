@@ -14,8 +14,8 @@ class StandType extends AbstractType
     {
         $builder
             ->add('stand_name')
-            ->add('location')
-            ->add('reservation');
+            ->add('location');
+        // ->add('reservation');
     }
 
     public function configureOptions(OptionsResolver $resolver): void

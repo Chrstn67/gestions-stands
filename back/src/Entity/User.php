@@ -17,8 +17,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     #[Groups("user:read")]
     #[Assert\NotBlank]
-
-
     private ?int $id = null;
 
     #[ORM\Column(length: 180, unique: true)]
@@ -27,7 +25,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column]
     #[Groups("user:read")]
-    #[Assert\NotBlank]
+
     private array $roles = [];
 
     /**
@@ -47,7 +45,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[Groups("user:read")]
 
     private ?Reservation $reservation = null;
-
     public function getId(): ?int
     {
         return $this->id;

@@ -28,8 +28,8 @@ class UserType extends AbstractType
                 ],
             ])
             ->add('email')
-            ->add('password')
-            ->add('reservation');
+            ->add('password');
+        // ->add('reservation');
     }
 
     public function configureOptions(OptionsResolver $resolver): void
