@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Stand;
 use App\Repository\StandRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\EntityNotFoundException;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,6 +21,22 @@ class ApiStandController extends AbstractController
     public function index(StandRepository $standRepository): Response
     {
         return $this->json($standRepository->findAll(), 200, [], ['groups' => 'stand:read']);
+    }
+
+    #[Route('/api/stand/{id}', name: 'api_stand_getSingleStand', methods: ['GET'])]
+    public function getSingleStand(StandRepository $standRepository, int $id): Response
+    {
+        try {
+            $stand = $standRepository->find($id);
+
+            if (!$stand) {
+                throw new EntityNotFoundException("Stand with ID $id not found.");
+            }
+
+            return $this->json($stand, 200, [], ['groups' => 'stand:read']);
+        } catch (EntityNotFoundException $exception) {
+            return $this->json(['message' => $exception->getMessage()], 404);
+        }
     }
 
 

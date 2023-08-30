@@ -2,9 +2,11 @@
 
 namespace App\Controller;
 
+
 use App\Entity\User;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\EntityNotFoundException;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -16,10 +18,25 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 class ApiUserController extends AbstractController
 {
     #[Route('/api/user', name: 'api_user_index', methods: ['GET'])]
-
     public function index(UserRepository $userRepository): Response
     {
         return $this->json($userRepository->findAll(), 200, [], ['groups' => 'user:read']);
+    }
+
+    #[Route('/api/user/{id}', name: 'api_user_getUser', methods: ['GET'])]
+    public function getSingleUser(UserRepository $userRepository, int $id): Response
+    {
+        try {
+            $user = $userRepository->find($id);
+
+            if (!$user) {
+                throw new EntityNotFoundException("User with ID $id not found.");
+            }
+
+            return $this->json($user, 200, [], ['groups' => 'user:read']);
+        } catch (EntityNotFoundException $exception) {
+            return $this->json(['message' => $exception->getMessage()], 404);
+        }
     }
 
 

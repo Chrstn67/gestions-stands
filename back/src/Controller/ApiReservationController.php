@@ -6,6 +6,7 @@ use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
 use App\Entity\Reservation;
 use App\Repository\ReservationRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\EntityNotFoundException;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -51,7 +52,45 @@ class ApiReservationController extends AbstractController
         return $this->json($formattedReservations, 200, [], ['groups' => 'reservation:read']);
     }
 
-    #[Route('/api/reservation', name: 'api_reservation_addReservation', methods: ['POST'])]
+    #[Route('/api/reservation/{id}', name: 'api_reservation_getSingleReservation', methods: ['GET'])]
+    public function getSingleReservation(ReservationRepository $reservationRepository, int $id): Response
+    {
+        try {
+            $reservation = $reservationRepository->find($id);
+
+            if (!$reservation) {
+                throw new EntityNotFoundException("Reservation with ID $id not found.");
+            }
+
+            $formattedReservation = [
+                'id' => $reservation->getId(),
+                'calendar_date' => $reservation->getCalendarDate()->format('d-m-Y'),
+                'hour_time' => $reservation->getHourTime()->format('H:i'),
+                'statut_resa' => $reservation->getStatutResa(),
+                'created_at' => $reservation->getCreatedAt()->format('d-m-Y H:i'),
+                'User' => [
+                    'name' => $reservation->getUser()->getName(),
+                    'email' => $reservation->getUser()->getEmail(),
+                    'password' => $reservation->getUser()->getPassword(),
+                    'roles' => $reservation->getUser()->getRoles(),
+                ],
+                'Stand' => [
+                    'location' => $reservation->getStand()->getLocation(),
+                    'name' => $reservation->getStand()->getStandName(),
+                ],
+            ];
+
+            return $this->json($formattedReservation, 200, [], ['groups' => 'reservation:read']);
+        } catch (EntityNotFoundException $exception) {
+            return $this->json(['message' => $exception->getMessage()], 404);
+        }
+    }
+
+
+
+
+
+    #[Route('/api/reservation/{id}', name: 'api_reservation_addReservation', methods: ['POST'])]
 
     public function addReservation(Request $request, SerializerInterface $serializer, EntityManagerInterface $em, ValidatorInterface $validator)
     {
