@@ -7,16 +7,17 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
-use Symfony\Component\Validator\Constraints as Assert;
+
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
+
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     #[Groups("user:read")]
-    #[Assert\NotBlank]
+#[Groups("reservation:read")]
     private ?int $id = null;
 
     #[ORM\Column(length: 180, unique: true)]
@@ -33,16 +34,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     #[ORM\Column]
     #[Groups("user:read")]
-    #[Assert\NotBlank]
+
     private ?string $password = null;
 
     #[ORM\Column(length: 50)]
     #[Groups("user:read")]
-    #[Assert\NotBlank]
+
     private ?string $name = null;
 
     #[ORM\OneToOne(mappedBy: 'User', cascade: ['persist', 'remove'])]
     #[Groups("user:read")]
+
 
     private ?Reservation $reservation = null;
     public function getId(): ?int

@@ -10,6 +10,7 @@
             <tr>
                 <th>Id</th>
                 <th>Date</th>
+                <th>Stand</th>
                 <th>À partir de</th>
                 <th>Par</th>
                 <th>Statut</th>
@@ -22,6 +23,7 @@
             <tr>
                 <td>{{ reservation.id }}</td>
                 <td>{{ reservation.calendarDate ? reservation.calendarDate|date('Y-m-d') : '' }}</td>
+                <td>{{ reservation.stand.location}}</td>
                 <td>{{ reservation.hourTime ? reservation.hourTime|date('H:i:s') : '' }}</td>
                 <td>{{ reservation.user.name}}</td>
                 <td>{{ reservation.getFormattedStatut() }}</td>

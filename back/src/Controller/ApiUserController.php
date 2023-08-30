@@ -49,8 +49,6 @@ class ApiUserController extends AbstractController
     }
 
 
-
-
     #[Route('/api/user/{id}', name: 'api_user_updateUser', methods: ['PUT'])]
     public function updateUser(Request $request, SerializerInterface $serializer, EntityManagerInterface $em, ValidatorInterface $validator, User $user)
     {

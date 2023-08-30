@@ -29,13 +29,13 @@ class UserType extends AbstractType
                 ],
             ])
             ->add('email')
-            ->add('password')
-            ->add('reservation', CollectionType::class, [
-                'entry_type' => ReservationType::class,
-                'allow_add' => true,
-                'allow_delete' => true,
-                'prototype' => true,
-            ]);
+            ->add('password');
+        // ->add('reservation', CollectionType::class, [
+        //     'entry_type' => ReservationType::class,
+        //     'allow_add' => true,
+        //     'allow_delete' => true,
+        //     'prototype' => true,
+        // ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
