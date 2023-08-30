@@ -14,7 +14,7 @@ class Stand
     #[ORM\GeneratedValue]
     #[ORM\Column]
     #[Groups("stand:read")]
-    #[Groups("reservation:read")]
+
     private ?int $id = null;
 
     #[Groups("stand:read")]

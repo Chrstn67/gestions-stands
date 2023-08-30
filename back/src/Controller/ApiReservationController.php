@@ -32,12 +32,16 @@ class ApiReservationController extends AbstractController
                 'User' => [
 
                     'name' => $reservation->getUser()->getName(),
-                    
+                    'email' => $reservation->getUser()->getEmail(),
+                    'password' => $reservation->getUser()->getPassword(),
+                    'roles' => $reservation->getUser()->getRoles(),
+
                 ],
                 'Stand' => [
 
-                    'Location' => $reservation->getStand()->getLocation(),
-                   
+                    'location' => $reservation->getStand()->getLocation(),
+                    'name' => $reservation->getStand()->getStandName(),
+
                 ],
             ];
 
