@@ -2,15 +2,20 @@
 
 namespace App\Controller;
 
+use App\Entity\Reservation;
 use App\Entity\User;
 use App\Form\UserType;
 use App\Repository\UserRepository;
+use App\Repository\ReservationRepository;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+
+
 
 #[Route('/user')]
 class UserController extends AbstractController
@@ -86,5 +91,40 @@ class UserController extends AbstractController
         }
 
         return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+
+
+    #[Route('/dashboard', name: 'app_user_dashboard', methods: ['GET'])]
+
+    public function dashboard(Request $request, EntityManagerInterface $entityManager): Response
+    {
+        // Utilisez $this->getUser() pour obtenir l'utilisateur connecté
+        $user = $this->getUser();
+
+        // Vous pouvez récupérer les créneaux disponibles depuis votre repository StandRepository
+        $standRepository = $entityManager->getRepository(Stand::class);
+        $stands = $standRepository->findAll();
+
+        $reservationRepository = $entityManager->getRepository(Reservation::class);
+        $reservations = $reservationRepository->findAll();
+
+        // Ajoutez ici la logique pour gérer les réservations
+
+        return $this->render('user/dashboard.html.twig', [
+            'user' => $user,
+            'stands' => $stands,
+            'reservations' => $reservations,
+        ]);
+    }
+
+    #[Route('/dashboard/reservation/{standId}', name: 'app_make_reservation', methods: ['GET'])]
+    public function makeReservation(Request $request, $standId): Response
+    {
+        // Vous pouvez ajouter ici la logique pour créer une réservation pour l'utilisateur
+        // en utilisant le stand identifié par $standId
+
+        // Redirigez l'utilisateur vers son tableau de bord après la réservation
+        return $this->redirectToRoute('app_user_dashboard');
     }
 }
