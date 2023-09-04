@@ -28,11 +28,11 @@ class ReservationType extends AbstractType
             ->add('created_at')
             ->add('User', EntityType::class, [
                 'class' => User::class,
-                'choice_label' => 'name', // Change this to the property you want to display
+                'choice_label' => 'name', 
             ])
             ->add('Stand', EntityType::class, [
                 'class' => Stand::class,
-                'choice_label' => 'stand_name', // Change this to the property you want to display
+                'choice_label' => 'stand_name', 
             ]);
     }
 

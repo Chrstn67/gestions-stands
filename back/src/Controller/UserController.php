@@ -95,36 +95,34 @@ class UserController extends AbstractController
 
 
 
-    #[Route('/dashboard', name: 'app_user_dashboard', methods: ['GET'])]
+    // #[Route('/dashboard', name: 'app_user_dashboard', methods: ['GET'])]
 
-    public function dashboard(Request $request, EntityManagerInterface $entityManager): Response
-    {
-        // Utilisez $this->getUser() pour obtenir l'utilisateur connecté
-        $user = $this->getUser();
+    // public function dashboard(Request $request, EntityManagerInterface $entityManager): Response
+    // {
 
-        // Vous pouvez récupérer les créneaux disponibles depuis votre repository StandRepository
-        $standRepository = $entityManager->getRepository(Stand::class);
-        $stands = $standRepository->findAll();
+    //     // $user = $this->getUser();
 
-        $reservationRepository = $entityManager->getRepository(Reservation::class);
-        $reservations = $reservationRepository->findAll();
+    //     // $standRepository = $entityManager->getRepository(Stand::class);
+    //     // $stands = $standRepository->findAll();
 
-        // Ajoutez ici la logique pour gérer les réservations
+    //     // $reservationRepository = $entityManager->getRepository(Reservation::class);
+    //     // $reservations = $reservationRepository->findAll();
 
-        return $this->render('user/dashboard.html.twig', [
-            'user' => $user,
-            'stands' => $stands,
-            'reservations' => $reservations,
-        ]);
-    }
+    //     // return $this->render('user/dashboard.html.twig', [
+    //     //     'user' => $user,
+    //     //     'stands' => $stands,
+    //     //     'reservations' => $reservations,
+    //     // ]);
 
-    #[Route('/dashboard/reservation/{standId}', name: 'app_make_reservation', methods: ['GET'])]
-    public function makeReservation(Request $request, $standId): Response
-    {
-        // Vous pouvez ajouter ici la logique pour créer une réservation pour l'utilisateur
-        // en utilisant le stand identifié par $standId
 
-        // Redirigez l'utilisateur vers son tableau de bord après la réservation
-        return $this->redirectToRoute('app_user_dashboard');
-    }
+    //     return $this->render('user/dashboard.html.twig');
+    // }
+
+    // #[Route('/dashboard/reservation/{standId}', name: 'app_make_reservation', methods: ['GET'])]
+    // public function makeReservation(Request $request, $standId): Response
+    // {
+    //     // TODO: Créer une réservation pour l'utilisateur en utilisant le stand identifié par $standId er rediriger l'utilisateur vers son tableau de bord après la réservation
+
+    //     return $this->redirectToRoute('app_user_dashboard');
+    // }
 }
