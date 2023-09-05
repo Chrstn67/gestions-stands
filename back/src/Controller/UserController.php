@@ -2,6 +2,10 @@
 
 namespace App\Controller;
 
+
+use App\Entity\Stand;
+use App\Form\ReservationType;
+
 use App\Entity\Reservation;
 use App\Entity\User;
 use App\Form\UserType;
@@ -14,6 +18,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 
 
@@ -82,7 +88,7 @@ class UserController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_user_delete', methods: ['POST'])]
+    #[Route('/{id}', name: 'app_user_delete', methods: ['DELETE'])]
     public function delete(Request $request, User $user, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete' . $user->getId(), $request->request->get('_token'))) {
@@ -96,33 +102,51 @@ class UserController extends AbstractController
 
 
     // #[Route('/dashboard', name: 'app_user_dashboard', methods: ['GET'])]
-
-    // public function dashboard(Request $request, EntityManagerInterface $entityManager): Response
+    // public function dashboard(Request $request, EntityManagerInterface $entityManager, ReservationRepository $reservationRepository): Response
     // {
+    //     $stands = $entityManager->getRepository(Stand::class)->findAll();
+    //     $reservations = $reservationRepository->findBy(['user' => $this->getUser()]);
 
-    //     // $user = $this->getUser();
-
-    //     // $standRepository = $entityManager->getRepository(Stand::class);
-    //     // $stands = $standRepository->findAll();
-
-    //     // $reservationRepository = $entityManager->getRepository(Reservation::class);
-    //     // $reservations = $reservationRepository->findAll();
-
-    //     // return $this->render('user/dashboard.html.twig', [
-    //     //     'user' => $user,
-    //     //     'stands' => $stands,
-    //     //     'reservations' => $reservations,
-    //     // ]);
-
-
-    //     return $this->render('user/dashboard.html.twig');
+    //     return $this->render('user/dashboard.html.twig', [
+    //         'stands' => $stands,
+    //         'reservations' => $reservations,
+    //     ]);
     // }
 
-    // #[Route('/dashboard/reservation/{standId}', name: 'app_make_reservation', methods: ['GET'])]
-    // public function makeReservation(Request $request, $standId): Response
+    // #[Route('/dashboard/reservation/{standId}', name: 'app_make_reservation', methods: ['GET', 'POST'])]
+    // #[ParamConverter('stand', options: ['mapping' => ['standId' => 'id']])]
+    // public function makeReservation(Request $request, Stand $stand, EntityManagerInterface $entityManager): Response
     // {
-    //     // TODO: Créer une réservation pour l'utilisateur en utilisant le stand identifié par $standId er rediriger l'utilisateur vers son tableau de bord après la réservation
+    //     // Récupérer l'utilisateur actuellement connecté
+    //     $user = $this->getUser();
 
-    //     return $this->redirectToRoute('app_user_dashboard');
+    //     if (!$user) {
+    //         throw $this->createNotFoundException('L\'utilisateur n\'est pas connecté.');
+    //     }
+
+    //     $stands = $entityManager->getRepository(Stand::class)->findAll();
+
+    //     $reservation = new Reservation();
+    //     $reservation->setUser($user);
+    //     $reservation->setStand($stand); // Définir le stand sélectionné
+
+    //     $form = $this->createForm(ReservationType::class, $reservation, [
+    //         'stands' => $stands,
+    //     ]);
+
+    //     $form->handleRequest($request);
+
+    //     if ($form->isSubmitted() && $form->isValid()) {
+    //         // Gérer la réservation ici
+
+    //         $entityManager->persist($reservation);
+    //         $entityManager->flush();
+
+    //         return $this->redirectToRoute('app_user_dashboard');
+    //     }
+
+    //     return $this->render('user/make_reservation.html.twig', [
+    //         'form' => $form->createView(),
+    //     ]);
     // }
 }
