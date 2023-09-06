@@ -59,10 +59,10 @@ Les administrateurs reçoivent des notifications pour approuver la réservation 
 |              | `/api/stand/{id}`       | GET     | 200 OK, 404 Not Found | `ApiStandController`       |
 |              | `/api/stand/{id}`       | PUT     | 200 OK, 404 Not Found | `ApiStandController`       |
 | Utilisateurs |                         |         |                       |                            |
-|              | `/api/utilisateur`      | GET     | 200 OK, 404 Not Found | `ApiUtilisateurController` |
-|              | `/api/utilisateur`      | POST    | 200 OK, 404 Not Found | `ApiUtilisateurController` |
-|              | `/api/utilisateur/{id}` | GET     | 200 OK, 404 Not Found | `ApiUtilisateurController` |
-|              | `/api/utilisateur/{id}` | PUT     | 200 OK, 404 Not Found | `ApiUtilisateurController` |
+|              | `/api/user`             | GET     | 200 OK, 404 Not Found | `ApiUserController`        |
+|              | `/api/user`             | POST    | 200 OK, 404 Not Found | `ApiUserController`        |
+|              | `/api/user/{id}`        | GET     | 200 OK, 404 Not Found | `ApiUserController`        |
+|              | `/api/user/{id}`        | PUT     | 200 OK, 404 Not Found | `ApiUserController`        |
 | Réservations |                         |         |                       |                            |
 |              | `/api/reservation`      | GET     | 200 OK, 404 Not Found | `ApiReservationController` |
 |              | `/api/reservation`      | POST    | 200 OK, 404 Not Found | `ApiReservationController` |
