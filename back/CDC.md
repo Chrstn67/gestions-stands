@@ -71,24 +71,17 @@ Les administrateurs reçoivent des notifications pour approuver la réservation 
 
 ## UserStories
 
-| ID   | En tant que        | Je veux pouvoir...                                  | Afin de...                                      |
-| ---- | ------------------ | --------------------------------------------------- | ----------------------------------------------- |
-| US1  | Utilisateur lambda | Voir la liste des stands sur un marché              | Savoir quelles personnes tiennent les stands    |
-| US2  | Utilisateur lambda | Voir les détails d'un stand spécifique              | Connaître les personnes, dates et emplacements  |
-| US3  | Utilisateur lambda | Voir le planning des créneaux horaires              | Identifier les créneaux disponibles             |
-| US4  | Utilisateur lambda | Voir les créneaux disponibles pour une date donnée  | Planifier ma participation sur un créneau       |
-| US5  | Utilisateur lambda | Voir la liste des réservations                      | Connaître les réservations en cours             |
-| US6  | Utilisateur lambda | Envoyer une demande de réservation                  | M'inscrire sur un créneau spécifique            |
-| US7  | Administrateur     | Ajouter, modifier ou supprimer des informations     | Gérer les stands, créneaux et réservations      |
-| US8  | Modérateur         | Accepter ou refuser une réservation                 | Gérer les demandes d'inscription                |
-| US9  | Utilisateur lambda | Voir les détails d'une réservation spécifique       | Connaître les détails d'une réservation         |
-| US10 | Utilisateur lambda | Voir la liste des utilisateurs                      | Gérer les profils des utilisateurs              |
-| US11 | Utilisateur lambda | Voir les détails d'un utilisateur spécifique        | Connaître les informations d'un utilisateur     |
-| US12 | Administrateur     | Ajouter, modifier ou supprimer des utilisateurs     | Gérer les utilisateurs                          |
-| US13 | Utilisateur lambda | Voir les détails d'une réservation spécifique       | Connaître les détails d'une réservation         |
-| US14 | Administrateur     | Voir la liste des lieux                             | Gérer les emplacements des stands               |
-| US15 | Administrateur     | Ajouter, modifier ou supprimer des lieux            | Gérer les emplacements des stands               |
-| US16 | Utilisateur lambda | Se connecter avec des informations d'identification | Accéder aux fonctionnalités de l'administration |
+| En tant que                 | Je veux pouvoir...                                  | Afin de...                                        |
+| --------------------------- | --------------------------------------------------- | ------------------------------------------------- |
+| Utilisateur lambda          | Voir la liste des stands reservés                   | Savoir quand et où je suis prévu                  |
+| Utilisateur lambda          | Se connecter avec des informations d'identification | Accéder à son dashboard personnel                 |
+| Administrateur / Modérateur | Ajouter, modifier ou supprimer des informations     | Gérer les stands, lieux, créneaux et réservations |
+| Administrateur / Modérateur | Voir la liste des utilisateurs                      | Gérer les utilisateurs                            |
+| Administrateur / Modérateur | Ajouter, modifier ou supprimer des utilisateurs     | Gérer les utilisateurs                            |
+| Administrateur / Modérateur | Voir la liste des stands                            | Gérer les emplacements des stands                 |
+| Administrateur / Modérateur | Ajouter, modifier ou supprimer des stands           | Gérer les emplacements des stands                 |
+| Administrateur / Modérateur | Voir la liste des reservations                      | Gérer les reservations des stands                 |
+| Administrateur / Modérateur | Ajouter, modifier ou supprimer des reservations     | Gérer les reservations des stands                 |
 
 ## MCD :
 

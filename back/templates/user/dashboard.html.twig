@@ -12,7 +12,7 @@
 
     <ul>
         {% for reservation in reservations %}
-    <li>{{ reservation.getCalendarDate()|date('Y-m-d') }} à {{ reservation.getHourTime()|date('H:i') }}</li>
+    <li>{{ reservation.getCalendarDate()|date('d-m-Y') }} à {{ reservation.getHourTime()|date('H:i') }}. <br> {{ reservation.stand.location }}</li>
 {% endfor %}
 
     </ul>
