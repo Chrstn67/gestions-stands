@@ -1,11 +1,11 @@
 # Résumé
 
-Le but de ce projet est simplement de faciliter l’organisation et la gestion de stands, sur un marché, par exemple. Typiquement, Un utilisateur doit voir au premier coup d'œil quelles sont les personnes qui tiennent le stand, à quelle(s) date(s), quel(s) créneau(x) horaire(s) et où.
-L’utilisateur lambda doit pouvoir se connecter pour voir l’affichage. L’administrateur et les modérateurs peuvent ajouter-modifier-supprimer des informations.
+Le but de ce projet est simplement de faciliter l’organisation et la gestion de stands, sur un marché, par exemple.
+L’utilisateur lambda doit pouvoir se connecter pour voir l’affichage. L’administrateur et les modérateurs peuvent ajouter-modifier-supprimer des informations. Ce sont eux qui ajoutent les données et crééent les comptes.
 
-L’idée est aussi de permettre à un utilisateur lambda d'envoyer une notification à l'admin et aux modérateurs pour s'inscrire sur un créneau....
+<!-- L’idée est aussi de permettre à un utilisateur lambda d'envoyer une notification à l'admin et aux modérateurs pour s'inscrire sur un créneau....
 Cet utilisateur voit un créneau de libre. Il pourrait cliquer dessus, soumettre un formulaire "Demande de réservation" => "Avec quelqu’un" ou "En attente" (comme ils doivent être deux).
-L'admin reçoit une notification, et accepte ou non l'inscription et renvoie la réponse à l'utilisateur.
+L'admin reçoit une notification, et accepte ou non l'inscription et renvoie la réponse à l'utilisateur. -->
 
 # Cahier des charges:
 

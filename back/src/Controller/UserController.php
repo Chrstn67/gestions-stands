@@ -11,6 +11,7 @@ use App\Entity\User;
 use App\Form\UserType;
 use App\Repository\UserRepository;
 use App\Repository\ReservationRepository;
+use App\Repository\StandRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -99,6 +100,25 @@ class UserController extends AbstractController
         return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
     }
 
+
+    #[Route('/dashboard/{id}', name: 'app_user_dashboard')]
+    public function dashboard(ReservationRepository $reservationRepository): Response
+    {
+        // Récupérer l'utilisateur actuellement connecté
+        $user = $this->getUser();
+
+        if (!$user instanceof User) {
+            throw $this->createAccessDeniedException('Utilisateur non connecté.');
+        }
+
+        // Utilisez une requête personnalisée pour récupérer les réservations de l'utilisateur
+        $reservations = $reservationRepository->findReservationsByUser($user);
+
+        return $this->render('user/dashboard.html.twig', [
+            'user' => $user,
+            'reservations' => $reservations,
+        ]);
+    }
 
 
     // #[Route('/dashboard', name: 'app_user_dashboard', methods: ['GET'])]

@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tableau de bord{% endblock %}
+
+{% block body %}
+    <h1>Bienvenue, {{ user.name }}</h1>
+    
+
+    
+    <h2>Mes réservations :</h2>
+    
+
+    <ul>
+        {% for reservation in reservations %}
+    <li>{{ reservation.getCalendarDate()|date('Y-m-d') }} à {{ reservation.getHourTime()|date('H:i') }}</li>
+{% endfor %}
+
+    </ul>
+    
+    <a href="{{ path('app_logout') }}">Se déconnecter</a>
+{% endblock %}

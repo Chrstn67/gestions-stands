@@ -19,35 +19,35 @@ class Reservation
 
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
-     #[Groups("reservation:read")]
+    #[Groups("reservation:read")]
 
     private ?\DateTimeInterface $calendar_date = null;
 
     #[ORM\Column(type: Types::TIME_MUTABLE)]
-     #[Groups("reservation:read")]
-    
+    #[Groups("reservation:read")]
+
     private ?\DateTimeInterface $hour_time = null;
 
     #[ORM\Column]
-     #[Groups("reservation:read")]
-  
+    #[Groups("reservation:read")]
+
     private ?int $statut_resa = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-     #[Groups("reservation:read")]
-  
+    #[Groups("reservation:read")]
+
     private ?\DateTimeInterface $created_at = null;
 
     #[ORM\OneToOne(inversedBy: 'reservation', cascade: ['persist', 'remove'])]
     #[ORM\JoinColumn(nullable: false)]
-     #[Groups("reservation:read")]
-  
+    #[Groups("reservation:read")]
+
     private ?User $User = null;
 
     #[ORM\OneToOne(inversedBy: 'reservation', cascade: ['persist', 'remove'])]
     #[ORM\JoinColumn(nullable: false)]
-     #[Groups("reservation:read")]
-  
+    #[Groups("reservation:read")]
+
 
     private ?Stand $Stand = null;
 
