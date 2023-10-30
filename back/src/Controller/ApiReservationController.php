@@ -145,19 +145,4 @@ class ApiReservationController extends AbstractController
             return $this->json(['status' => 400, 'message' => $exception->getMessage()], 400);
         }
     }
-
-    #[Route('/api/reservation/{id}', name: 'api_reservation_deleteReservation', methods: ['DELETE'])]
-public function deleteReservation(Reservation $reservation, EntityManagerInterface $em)
-{
-    try {
-       
-        $em->remove($reservation);
-        $em->flush();
-
-       
-        return new Response(null, 204);
-    } catch (EntityNotFoundException $exception) {
-        return $this->json(['message' => $exception->getMessage()], 404);
-    }
-}
 }
