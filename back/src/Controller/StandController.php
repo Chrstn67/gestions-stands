@@ -68,7 +68,7 @@ class StandController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_stand_delete', methods: ['DELETE'])]
+    #[Route('/{id}', name: 'app_stand_delete', methods: ['GET', 'DELETE'])]
     public function delete(Request $request, Stand $stand, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete' . $stand->getId(), $request->request->get('_token'))) {

@@ -13,6 +13,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\Exception\NotEncodableValueException;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class ApiStandController extends AbstractController
 {
@@ -91,4 +92,21 @@ class ApiStandController extends AbstractController
             return $this->json(['status' => 400, 'message' => $exception->getMessage()], 400);
         }
     }
+
+   
+    #[Route('/api/stand/{id}', name: 'api_stand_deleteStand', methods: ['DELETE'])]
+public function deleteStand(Request $request, EntityManagerInterface $em, Stand $stand)
+{
+    if (!$stand) {
+        return $this->json(['message' => 'Stand not found'], 404);
+    }
+
+
+    $em->remove($stand);
+    $em->flush();
+
+    return $this->json(['message' => 'Stand deleted'], 204);
 }
+
+}
+

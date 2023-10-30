@@ -93,4 +93,23 @@ class ApiUserController extends AbstractController
             return $this->json(['status' => 400, 'message' => $exception->getMessage()], 400);
         }
     }
+    #[Route('/api/user/{id}', name: 'api_user_deleteUser', methods: ['DELETE'])]
+    public function deleteUser(User $user, EntityManagerInterface $em): Response
+    {
+        try {
+            if ($user) {
+                $em->remove($user);
+                $em->flush();
+    
+                return $this->json(['message' => 'User deleted successfully'], 204);
+            } else {
+                return $this->json(['message' => 'User not found'], 404);
+            }
+        } catch (\Exception $exception) {
+            return $this->json(['message' => 'An error occurred while deleting the user'], 500);
+        }
+    }
+    
+    
 }
+
