@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Frontend API</title>
+</head>
+<body>
+    <h1>Frontend pour les APIs User, Stand et Reservation</h1>
+
+    <h2>Utilisateurs</h2>
+    <ul id="users"></ul>
+
+    <h2>Stands</h2>
+    <ul id="stands"></ul>
+
+    <h2>Réservations</h2>
+    <ul id="reservations"></ul>
+
+    <script>
+      async function fetchAndDisplayUsers() {
+            const response = await fetch("http://localhost:8000/api/user")
+            const user = await response.json()
+            console.log(user)
+           
+
+}
+
+async function fetchAndDisplayStands() {
+            const response = await fetch("http://localhost:8000/api/stand")
+            const stand = await response.json()
+            console.log(stand)
+           
+
+}
+
+async function fetchAndDisplayReservations() {
+            const response = await fetch("http://localhost:8000/api/reservation")
+            const reservation = await response.json()
+            console.log(reservation)
+           
+
+}
+
+
+
+    </script>
+</body>
+</html>
