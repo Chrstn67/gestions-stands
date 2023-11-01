@@ -16,32 +16,30 @@
     <ul id="reservations"></ul>
 
     <script>
-      async function fetchAndDisplayUsers() {
+
+async function init () {
+  await fetchAndDisplayUsers()
+}
+
+window.onload = init
+
+async function fetchAndDisplayUsers() {
+try {
             const response = await fetch("http://localhost:8000/api/user")
             const user = await response.json()
             console.log(user)
-           
+} catch(ex) {
+console.error(ex)
+}
+      }
 
+
+
+async function init () {
+  await fetchAndDisplayUsers()
 }
 
-async function fetchAndDisplayStands() {
-            const response = await fetch("http://localhost:8000/api/stand")
-            const stand = await response.json()
-            console.log(stand)
-           
-
-}
-
-async function fetchAndDisplayReservations() {
-            const response = await fetch("http://localhost:8000/api/reservation")
-            const reservation = await response.json()
-            console.log(reservation)
-           
-
-}
-
-
-
+window.onload = init
     </script>
 </body>
 </html>
