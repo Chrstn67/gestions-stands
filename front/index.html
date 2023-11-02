@@ -1,45 +1,113 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
+    <meta charset="UTF-8">
     <title>Frontend API</title>
+    <style>
+      body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            background-color: #333;
+            color: #fff;
+            padding: 20px 0;
+            margin: 0;
+        }
+
+        h2 {
+            background-color: #555;
+            color: #fff;
+            padding: 10px;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            margin: 5px;
+            padding: 10px;
+            border-radius: 5px;
+        }
+    </style>
+    <script type="module">
+        async function fetchAndDisplayUsers() {
+            const response = await fetch("http://localhost:8000/api/user");
+            const users = await response.json();
+            displayUsers(users);
+        }
+        
+        async function fetchAndDisplayStands() {
+            const response = await fetch("http://localhost:8000/api/stand");
+            const stands = await response.json();
+            displayStands(stands);
+        }
+
+        async function fetchAndDisplayReservations() {
+            const response = await fetch("http://localhost:8000/api/reservation");
+            const reservations = await response.json();
+            displayReservations(reservations);
+        }
+
+        function displayUsers(users) {
+            const usersList = document.getElementById('users');
+
+            usersList.innerHTML = ""; // Efface le contenu précédent
+
+            users.forEach((user) => {
+                const listItem = document.createElement('li');
+                listItem.textContent = `ID: ${user.id}, Nom: ${user.name}, Email: ${user.email}`;
+                usersList.appendChild(listItem);
+            });
+        }
+
+        function displayStands(stands) {
+            const standsList = document.getElementById('stands');
+
+            standsList.innerHTML = ""; // Efface le contenu précédent
+
+            stands.forEach((stand) => {
+                const listItem = document.createElement('li');
+                listItem.textContent = `ID: ${stand.id}, Nom: ${stand.stand_name}, Lieu: ${stand.location}`;
+                standsList.appendChild(listItem);
+            });
+        }
+
+        function displayReservations(reservations) {
+            const reservationsList = document.getElementById('reservations');
+
+            reservationsList.innerHTML = ""; // Efface le contenu précédent
+
+            reservations.forEach((reservation) => {
+                const listItem = document.createElement('li');
+                listItem.textContent = `ID: ${reservation.id}, Nom: ${reservation.User.name}, Stand: ${reservation.Stand.stand_name}`;
+                reservationsList.appendChild(listItem);
+            });
+        }
+
+        fetchAndDisplayUsers();
+        fetchAndDisplayStands();
+        fetchAndDisplayReservations();
+    </script>
 </head>
 <body>
     <h1>Frontend pour les APIs User, Stand et Reservation</h1>
-
+    
     <h2>Utilisateurs</h2>
     <ul id="users"></ul>
-
+    
     <h2>Stands</h2>
     <ul id="stands"></ul>
-
+    
     <h2>Réservations</h2>
     <ul id="reservations"></ul>
-
-    <script>
-
-async function init () {
-  await fetchAndDisplayUsers()
-}
-
-window.onload = init
-
-async function fetchAndDisplayUsers() {
-try {
-            const response = await fetch("http://localhost:8000/api/user")
-            const user = await response.json()
-            console.log(user)
-} catch(ex) {
-console.error(ex)
-}
-      }
-
-
-
-async function init () {
-  await fetchAndDisplayUsers()
-}
-
-window.onload = init
-    </script>
 </body>
 </html>
