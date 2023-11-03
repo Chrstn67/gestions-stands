@@ -24,13 +24,7 @@ class ReservationType extends AbstractType
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        $users = $this->entityManager->getRepository(User::class)->findAll();
-
-        $choices = [];
-        foreach ($users as $user) {
-            $choices[$user->getName()] = $user->getId();
-        }
-
+       
         $builder
             ->add('calendar_date')
             ->add('hour_time')
@@ -42,8 +36,9 @@ class ReservationType extends AbstractType
                 ],
             ])
             ->add('created_at')
-            ->add('User', ChoiceType::class, [
-                'choices' => $choices,
+            ->add('User', EntityType::class, [
+                "choice_label" => "name",
+                "class" => User::class,
                 'multiple' => true,
                 'expanded' => true,
                 'label' => 'Utilisateurs',

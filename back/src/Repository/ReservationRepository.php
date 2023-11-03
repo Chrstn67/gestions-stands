@@ -25,8 +25,9 @@ class ReservationRepository extends ServiceEntityRepository
     public function findReservationsByUser(User $user)
     {
         return $this->createQueryBuilder('r')
-            ->andWhere('r.User = :user')
-            ->setParameter('user', $user)
+            ->join('r.user', 'u')
+            ->where('u = :user')
+            ->setParameter(':user', $user)
             ->getQuery()
             ->getResult();
     }

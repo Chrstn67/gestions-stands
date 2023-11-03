@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -42,11 +44,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     private ?string $name = null;
 
-    #[ORM\OneToOne(mappedBy: 'User', cascade: ['persist', 'remove'])]
-    #[Groups("user:read")]
+    #[ORM\ManyToMany(targetEntity: Reservation::class, mappedBy: 'user')]
+    private Collection $reservations;
 
+    public function __construct()
+    {
+        $this->reservations = new ArrayCollection();
+    }
 
-    private ?Reservation $reservation = null;
     public function getId(): ?int
     {
         return $this->id;
@@ -129,20 +134,32 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getReservation(): ?Reservation
+    /**
+     * @return Collection<int, Reservation>
+     */
+    public function getReservations(): Collection
     {
-        return $this->reservation;
+        return $this->reservations;
     }
 
-    public function setReservation(Reservation $reservation): static
+    public function addReservation(Reservation $reservation): static
     {
-        // set the owning side of the relation if necessary
-        if ($reservation->getUser() !== $this) {
-            $reservation->setUser($this);
+        if (!$this->reservations->contains($reservation)) {
+            $this->reservations->add($reservation);
+            $reservation->addUser($this);
         }
-
-        $this->reservation = $reservation;
 
         return $this;
     }
+
+    public function removeReservation(Reservation $reservation): static
+    {
+        if ($this->reservations->removeElement($reservation)) {
+            $reservation->removeUser($this);
+        }
+
+        return $this;
+    }
+
+    
 }

@@ -21,36 +21,38 @@ class ApiReservationController extends AbstractController
     public function index(ReservationRepository $reservationRepository): Response
     {
         $reservations = $reservationRepository->findAll();
-
+    
         $formattedReservations = [];
         foreach ($reservations as $reservation) {
+            $formattedUsers = [];
+            foreach ($reservation->getUser() as $user) {
+                $formattedUsers[] = [
+                    'name' => $user->getName(),
+                    'email' => $user->getEmail(),
+                    'password' => $user->getPassword(),
+                    'roles' => $user->getRoles(),
+                ];
+            }
+    
             $formattedReservation = [
                 'id' => $reservation->getId(),
                 'calendar_date' => $reservation->getCalendarDate()->format('d-m-Y'),
                 'hour_time' => $reservation->getHourTime()->format('H:i'),
                 'statut_resa' => $reservation->getStatutResa(),
                 'created_at' => $reservation->getCreatedAt()->format('d-m-Y H:i'),
-                'User' => [
-
-                    'name' => $reservation->getUser()->getName(),
-                    'email' => $reservation->getUser()->getEmail(),
-                    'password' => $reservation->getUser()->getPassword(),
-                    'roles' => $reservation->getUser()->getRoles(),
-
-                ],
+                'Users' => $formattedUsers,
                 'Stand' => [
-
                     'location' => $reservation->getStand()->getLocation(),
                     'name' => $reservation->getStand()->getStandName(),
-
                 ],
             ];
-
+    
             $formattedReservations[] = $formattedReservation;
         }
-
+    
         return $this->json($formattedReservations, 200, [], ['groups' => 'reservation:read']);
     }
+    
 
     #[Route('/api/reservation/{id}', name: 'api_reservation_getSingleReservation', methods: ['GET'])]
     public function getSingleReservation(ReservationRepository $reservationRepository, int $id): Response
@@ -69,11 +71,12 @@ class ApiReservationController extends AbstractController
                 'statut_resa' => $reservation->getStatutResa(),
                 'created_at' => $reservation->getCreatedAt()->format('d-m-Y H:i'),
                 'User' => [
-                    'name' => $reservation->getUser()->getName(),
-                    'email' => $reservation->getUser()->getEmail(),
-                    'password' => $reservation->getUser()->getPassword(),
-                    'roles' => $reservation->getUser()->getRoles(),
+                    'name' => $reservation->getUser()[0]->getName(),
+                    'email' => $reservation->getUser()[0]->getEmail(),
+                    'password' => $reservation->getUser()[0]->getPassword(),
+                    'roles' => $reservation->getUser()[0]->getRoles(),
                 ],
+                
                 'Stand' => [
                     'location' => $reservation->getStand()->getLocation(),
                     'name' => $reservation->getStand()->getStandName(),
@@ -129,7 +132,7 @@ class ApiReservationController extends AbstractController
             $reservation->setHourTime($updatedReservation->getHourTime());
             $reservation->setStatutResa($updatedReservation->getStatutResa());
             $reservation->setCreatedAt($updatedReservation->getCreatedAt());
-            $reservation->setUser($updatedReservation->getUser());
+            // $reservation->setUser($updatedReservation->getUser());
             $reservation->setStand($updatedReservation->getStand());
 
             $errors = $validator->validate($reservation);

@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\StandRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -25,11 +27,18 @@ class Stand
     #[ORM\Column(length: 50)]
     private ?string $location = null;
 
-    #[Groups("stand:read")]
+    #[ORM\OneToMany(mappedBy: 'stand', targetEntity: Reservation::class, orphanRemoval: true)]
+    private Collection $reservations;
 
-    #[ORM\OneToOne(mappedBy: 'Stand', cascade: ['persist', 'remove'])]
-    private ?Reservation $reservation = null;
+   
 
+    public function __construct()
+    {
+        $this->reservations = new ArrayCollection();
+       
+    }
+
+   
     public function getId(): ?int
     {
         return $this->id;
@@ -59,20 +68,36 @@ class Stand
         return $this;
     }
 
-    public function getReservation(): ?Reservation
+    /**
+     * @return Collection<int, Reservation>
+     */
+    public function getReservations(): Collection
     {
-        return $this->reservation;
+        return $this->reservations;
     }
 
-    public function setReservation(Reservation $reservation): static
+    public function addReservation(Reservation $reservation): static
     {
-        // set the owning side of the relation if necessary
-        if ($reservation->getStand() !== $this) {
+        if (!$this->reservations->contains($reservation)) {
+            $this->reservations->add($reservation);
             $reservation->setStand($this);
         }
 
-        $this->reservation = $reservation;
+        return $this;
+    }
+
+    public function removeReservation(Reservation $reservation): static
+    {
+        if ($this->reservations->removeElement($reservation)) {
+            // set the owning side to null (unless already changed)
+            if ($reservation->getStand() === $this) {
+                $reservation->setStand(null);
+            }
+        }
 
         return $this;
     }
+
+   
+   
 }

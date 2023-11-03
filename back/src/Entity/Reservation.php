@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ReservationRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
@@ -38,18 +40,20 @@ class Reservation
 
     private ?\DateTimeInterface $created_at = null;
 
-    #[ORM\OneToOne(inversedBy: 'reservation', cascade: ['persist', 'remove'])]
+
+    
+
+    #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'reservations')]
+    private Collection $user;
+
+    #[ORM\ManyToOne(inversedBy: 'stand')]
     #[ORM\JoinColumn(nullable: false)]
-    #[Groups("reservation:read")]
+    private ?Stand $stand = null;
 
-    private ?User $User = null;
-
-    #[ORM\OneToOne(inversedBy: 'reservation', cascade: ['persist', 'remove'])]
-    #[ORM\JoinColumn(nullable: false)]
-    #[Groups("reservation:read")]
-
-
-    private ?Stand $Stand = null;
+    public function __construct()
+    {
+        $this->user = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -104,30 +108,8 @@ class Reservation
         return $this;
     }
 
-    public function getUser(): ?User
-    {
-        return $this->User;
-    }
-
-    public function setUser(User $User): static
-    {
-        $this->User = $User;
-
-        return $this;
-    }
-
-    public function getStand(): ?Stand
-    {
-        return $this->Stand;
-    }
-
-    public function setStand(Stand $Stand): static
-    {
-        $this->Stand = $Stand;
-
-        return $this;
-    }
-
+   
+    
     public function getFormattedStatut(): string
     {
         $statutLabels = [
@@ -137,5 +119,41 @@ class Reservation
         ];
 
         return $statutLabels[$this->statut_resa];
+    }
+
+    /**
+     * @return Collection<int, User>
+     */
+    public function getUser(): Collection
+    {
+        return $this->user;
+    }
+
+    public function addUser(User $user): static
+    {
+        if (!$this->user->contains($user)) {
+            $this->user->add($user);
+        }
+
+        return $this;
+    }
+
+    public function removeUser(User $user): static
+    {
+        $this->user->removeElement($user);
+
+        return $this;
+    }
+
+    public function getStand(): ?Stand
+    {
+        return $this->stand;
+    }
+
+    public function setStand(?Stand $stand): static
+    {
+        $this->stand = $stand;
+
+        return $this;
     }
 }

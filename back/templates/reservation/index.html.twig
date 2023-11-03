@@ -25,7 +25,16 @@
                 <td>{{ reservation.calendarDate ? reservation.calendarDate|date('Y-m-d') : '' }}</td>
                 <td>{{ reservation.stand.location}}</td>
                 <td>{{ reservation.hourTime ? reservation.hourTime|date('H:i:s') : '' }}</td>
-                <td>{{ reservation.user.name}}</td>
+
+<td>
+                 {% for user in reservation.user %}
+                 
+                 {{ user.name}} <br>
+              
+
+{% endfor %}
+</td> 
+
                 <td>{{ reservation.getFormattedStatut() }}</td>
                 <td>{{ reservation.createdAt ? reservation.createdAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>
