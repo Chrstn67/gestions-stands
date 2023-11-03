@@ -43,24 +43,27 @@
             const response = await fetch("http://localhost:8000/api/user");
             const users = await response.json();
             displayUsers(users);
+            console.log(users)
         }
         
         async function fetchAndDisplayStands() {
             const response = await fetch("http://localhost:8000/api/stand");
             const stands = await response.json();
             displayStands(stands);
+            console.log(stands)
         }
 
         async function fetchAndDisplayReservations() {
             const response = await fetch("http://localhost:8000/api/reservation");
             const reservations = await response.json();
             displayReservations(reservations);
+            console.log(reservations)
         }
 
         function displayUsers(users) {
             const usersList = document.getElementById('users');
 
-            usersList.innerHTML = ""; // Efface le contenu précédent
+            usersList.innerHTML = ""; 
 
             users.forEach((user) => {
                 const listItem = document.createElement('li');
@@ -72,7 +75,7 @@
         function displayStands(stands) {
             const standsList = document.getElementById('stands');
 
-            standsList.innerHTML = ""; // Efface le contenu précédent
+            standsList.innerHTML = "";
 
             stands.forEach((stand) => {
                 const listItem = document.createElement('li');
@@ -82,16 +85,22 @@
         }
 
         function displayReservations(reservations) {
-            const reservationsList = document.getElementById('reservations');
+    const reservationsList = document.getElementById('reservations');
 
-            reservationsList.innerHTML = ""; // Efface le contenu précédent
+    reservationsList.innerHTML = "";
 
-            reservations.forEach((reservation) => {
-                const listItem = document.createElement('li');
-                listItem.textContent = `ID: ${reservation.id}, Nom: ${reservation.User.name}, Stand: ${reservation.Stand.stand_name}`;
-                reservationsList.appendChild(listItem);
-            });
-        }
+    reservations.forEach((reservation) => {
+        let usersText = '';
+        reservation.Users.forEach((user) => {
+            usersText += `Nom: ${user.name}, `;
+        });
+
+        const listItem = document.createElement('li');
+        listItem.textContent = `ID: ${reservation.id}, Utilisateurs: ${usersText}, Stand: ${reservation.Stand.name}, ${reservation.Stand.location}`;
+        reservationsList.appendChild(listItem);
+    });
+}
+
 
         fetchAndDisplayUsers();
         fetchAndDisplayStands();
